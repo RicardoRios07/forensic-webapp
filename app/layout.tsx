@@ -17,9 +17,9 @@ const _jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DVWA Forensic Monitor",
+  title: "DVWA Monitor Forense",
   description:
-    "Real-time forensic analysis dashboard for Docker containers running DVWA. Detect SQL injection, command injection, brute force, and file inclusion attacks.",
+    "Panel de an\u00e1lisis forense en tiempo real para contenedores Docker con DVWA. Detecta inyecci\u00f3n SQL, inyecci\u00f3n de comandos, fuerza bruta e inclusi\u00f3n de archivos.",
 };
 
 export const viewport: Viewport = {
@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="es" className="dark">
       <body
         className={`${_inter.variable} ${_jetbrainsMono.variable} font-sans antialiased`}
       >

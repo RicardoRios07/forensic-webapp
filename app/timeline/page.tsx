@@ -16,10 +16,10 @@ import type { TimelineEvent } from "@/types/forensic";
 import { cn } from "@/lib/utils";
 
 const TIME_RANGES = [
-  { value: "5m", label: "Last 5 min", ms: 5 * 60 * 1000 },
-  { value: "1h", label: "Last 1 hour", ms: 60 * 60 * 1000 },
-  { value: "24h", label: "Last 24 hours", ms: 24 * 60 * 60 * 1000 },
-  { value: "all", label: "All", ms: 0 },
+  { value: "5m", label: "\u00dalt. 5 min", ms: 5 * 60 * 1000 },
+  { value: "1h", label: "\u00dalt. 1 hora", ms: 60 * 60 * 1000 },
+  { value: "24h", label: "\u00dalt. 24 horas", ms: 24 * 60 * 60 * 1000 },
+  { value: "all", label: "Todo", ms: 0 },
 ];
 
 export default function TimelinePage() {
@@ -76,10 +76,10 @@ export default function TimelinePage() {
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground">
-            Incident Timeline
+            Cronolog\u00eda de Incidentes
           </h1>
           <p className="text-sm text-muted-foreground">
-            Chronological view of all security events and access patterns
+            Vista cronol\u00f3gica de todos los eventos de seguridad y patrones de acceso
           </p>
         </div>
         <Button
@@ -89,7 +89,7 @@ export default function TimelinePage() {
           onClick={handleExport}
         >
           <Download className="h-3.5 w-3.5" />
-          Export Timeline
+          Exportar Cronolog\u00eda
         </Button>
       </div>
 
@@ -118,13 +118,13 @@ export default function TimelinePage() {
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Types</SelectItem>
-            <SelectItem value="attack">Attacks</SelectItem>
-            <SelectItem value="access">Normal Access</SelectItem>
-            <SelectItem value="sqli">SQL Injection</SelectItem>
-            <SelectItem value="command_injection">Command Injection</SelectItem>
-            <SelectItem value="brute_force">Brute Force</SelectItem>
-            <SelectItem value="file_inclusion">File Inclusion</SelectItem>
+            <SelectItem value="all">Todos los Tipos</SelectItem>
+            <SelectItem value="attack">Ataques</SelectItem>
+            <SelectItem value="access">Acceso Normal</SelectItem>
+            <SelectItem value="sqli">Inyecci\u00f3n SQL</SelectItem>
+            <SelectItem value="command_injection">Inyecci\u00f3n de Comandos</SelectItem>
+            <SelectItem value="brute_force">Fuerza Bruta</SelectItem>
+            <SelectItem value="file_inclusion">Inclusi\u00f3n de Archivos</SelectItem>
           </SelectContent>
         </Select>
 
@@ -136,13 +136,13 @@ export default function TimelinePage() {
             </span>
           </span>
           <span>
-            Attacks:{" "}
+            Ataques:{" "}
             <span className="font-semibold text-severity-high">
               {attackEvents}
             </span>
           </span>
           <span>
-            Normal:{" "}
+            Normales:{" "}
             <span className="font-semibold text-severity-info">
               {normalEvents}
             </span>

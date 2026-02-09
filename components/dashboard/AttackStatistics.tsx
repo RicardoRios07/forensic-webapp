@@ -16,37 +16,37 @@ export function AttackStatistics({ stats }: AttackStatisticsProps) {
     <Card className="border-border bg-card">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-sm font-medium text-muted-foreground">
-          Attacks Detected
+          Ataques Detectados
         </CardTitle>
         <ShieldAlert className="h-4 w-4 text-severity-high" />
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold text-foreground">{total}</div>
         <p className="mt-1 text-xs text-muted-foreground">
-          {rate} attacks/min
+          {rate} ataques/min
         </p>
 
         <div className="mt-4 space-y-2">
           <AttackRow
-            label="SQL Injection"
+            label="Inyecci\u00f3n SQL"
             count={stats?.attacksByType.sqli ?? 0}
             total={total}
             color="bg-attack-sqli"
           />
           <AttackRow
-            label="Command Inj."
+            label="Inyecci\u00f3n Cmd"
             count={stats?.attacksByType.command_injection ?? 0}
             total={total}
             color="bg-attack-cmdi"
           />
           <AttackRow
-            label="Brute Force"
+            label="Fuerza Bruta"
             count={stats?.attacksByType.brute_force ?? 0}
             total={total}
             color="bg-attack-brute"
           />
           <AttackRow
-            label="File Inclusion"
+            label="Inclusi\u00f3n Arch."
             count={stats?.attacksByType.file_inclusion ?? 0}
             total={total}
             color="bg-attack-fi"

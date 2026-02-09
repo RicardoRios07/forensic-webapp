@@ -13,10 +13,10 @@ import { cn } from "@/lib/utils";
 import { ConnectionStatus } from "./ConnectionStatus";
 
 const NAV_ITEMS = [
-  { href: "/", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/logs", label: "Logs", icon: ScrollText },
-  { href: "/alerts", label: "Alerts", icon: ShieldAlert },
-  { href: "/timeline", label: "Timeline", icon: Clock },
+  { href: "/", label: "Panel", icon: LayoutDashboard },
+  { href: "/logs", label: "Registros", icon: ScrollText },
+  { href: "/alerts", label: "Alertas", icon: ShieldAlert },
+  { href: "/timeline", label: "Cronolog\u00eda", icon: Clock },
 ];
 
 export function Navbar() {
@@ -30,11 +30,11 @@ export function Navbar() {
             <Shield className="h-4 w-4 text-primary-foreground" />
           </div>
           <span className="text-lg font-bold tracking-tight text-foreground">
-            DVWA Forensic Monitor
+            DVWA Monitor Forense
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" role="navigation" aria-label="Main navigation">
+        <nav className="hidden items-center gap-1 md:flex" role="navigation" aria-label="Navegaci\u00f3n principal">
           {NAV_ITEMS.map((item) => {
             const isActive =
               pathname === item.href ||

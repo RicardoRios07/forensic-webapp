@@ -20,10 +20,10 @@ const SEVERITY_COLORS: Record<string, string> = {
 };
 
 const ATTACK_LABELS: Record<string, string> = {
-  sqli: "SQLi",
-  command_injection: "Cmd Inj",
-  brute_force: "Brute Force",
-  file_inclusion: "File Inc",
+  sqli: "Iny. SQL",
+  command_injection: "Iny. Cmd",
+  brute_force: "F. Bruta",
+  file_inclusion: "Inc. Arch",
 };
 
 export function RecentTimeline({ events }: RecentTimelineProps) {
@@ -33,11 +33,11 @@ export function RecentTimeline({ events }: RecentTimelineProps) {
     <Card className="border-border bg-card">
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="text-sm font-medium text-muted-foreground">
-          Recent Timeline
+          Cronolog\u00eda Reciente
         </CardTitle>
         <Button variant="ghost" size="sm" asChild className="h-7 gap-1 text-xs text-primary">
           <Link href="/timeline">
-            View Full
+            Ver Todo
             <ArrowRight className="h-3 w-3" />
           </Link>
         </Button>
@@ -45,7 +45,7 @@ export function RecentTimeline({ events }: RecentTimelineProps) {
       <CardContent>
         {recentEvents.length === 0 ? (
           <p className="py-8 text-center text-sm text-muted-foreground">
-            Waiting for events...
+            Esperando eventos...
           </p>
         ) : (
           <div className="space-y-3">

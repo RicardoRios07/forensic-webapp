@@ -15,26 +15,26 @@ import type { Alert } from "@/types/forensic";
 import { cn } from "@/lib/utils";
 
 const SEVERITY_FILTERS = [
-  { value: "all", label: "All Severities" },
-  { value: "critical", label: "Critical" },
-  { value: "high", label: "High" },
-  { value: "medium", label: "Medium" },
-  { value: "low", label: "Low" },
+  { value: "all", label: "Todas las Severidades" },
+  { value: "critical", label: "Cr\u00edtico" },
+  { value: "high", label: "Alto" },
+  { value: "medium", label: "Medio" },
+  { value: "low", label: "Bajo" },
 ];
 
 const STATUS_FILTERS = [
-  { value: "all", label: "All Status" },
-  { value: "active", label: "Active" },
-  { value: "acknowledged", label: "Acknowledged" },
-  { value: "resolved", label: "Resolved" },
+  { value: "all", label: "Todos los Estados" },
+  { value: "active", label: "Activa" },
+  { value: "acknowledged", label: "Reconocida" },
+  { value: "resolved", label: "Resuelta" },
 ];
 
 const TYPE_FILTERS = [
-  { value: "all", label: "All Types" },
-  { value: "sqli", label: "SQL Injection" },
-  { value: "command_injection", label: "Command Injection" },
-  { value: "brute_force", label: "Brute Force" },
-  { value: "file_inclusion", label: "File Inclusion" },
+  { value: "all", label: "Todos los Tipos" },
+  { value: "sqli", label: "Inyecci\u00f3n SQL" },
+  { value: "command_injection", label: "Inyecci\u00f3n de Comandos" },
+  { value: "brute_force", label: "Fuerza Bruta" },
+  { value: "file_inclusion", label: "Inclusi\u00f3n de Archivos" },
 ];
 
 export default function AlertsPage() {
@@ -103,35 +103,35 @@ export default function AlertsPage() {
     <div className="p-6">
       <div className="mb-6">
         <h1 className="text-2xl font-bold tracking-tight text-foreground">
-          Alerts
+          Alertas
         </h1>
         <p className="text-sm text-muted-foreground">
-          Security alerts generated from attack detection analysis
+          Alertas de seguridad generadas por el an\u00e1lisis de detecci\u00f3n de ataques
         </p>
       </div>
 
       {/* Summary badges */}
       <div className="mb-4 flex flex-wrap items-center gap-2">
         {[
-          { key: "all", label: "All", style: "bg-accent text-foreground" },
+          { key: "all", label: "Todas", style: "bg-accent text-foreground" },
           {
             key: "critical",
-            label: "Critical",
+            label: "Cr\u00edtico",
             style: "bg-severity-critical/20 text-severity-critical",
           },
           {
             key: "high",
-            label: "High",
+            label: "Alto",
             style: "bg-severity-high/20 text-severity-high",
           },
           {
             key: "medium",
-            label: "Medium",
+            label: "Medio",
             style: "bg-severity-medium/20 text-severity-medium",
           },
           {
             key: "low",
-            label: "Low",
+            label: "Bajo",
             style: "bg-severity-low/20 text-severity-low",
           },
         ].map((item) => (
@@ -187,8 +187,8 @@ export default function AlertsPage() {
         {alerts.length === 0 ? (
           <div className="rounded-lg border border-border bg-card py-16 text-center">
             <p className="text-sm text-muted-foreground">
-              No alerts matching your filters. Alerts will appear as attacks are
-              detected.
+              No hay alertas que coincidan con tus filtros. Las alertas
+              aparecer\u00e1n a medida que se detecten ataques.
             </p>
           </div>
         ) : (

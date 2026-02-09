@@ -54,10 +54,10 @@ export default function DashboardPage() {
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground text-balance">
-            Forensic Dashboard
+            Panel Forense
           </h1>
           <p className="text-sm text-muted-foreground">
-            Real-time monitoring and attack detection for DVWA container
+            Monitoreo en tiempo real y detecci&oacute;n de ataques para contenedor DVWA
           </p>
         </div>
         {isStreaming && (
@@ -67,7 +67,7 @@ export default function DashboardPage() {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
             </span>
             <span className="text-xs font-medium text-primary">
-              Live Monitoring
+              Monitoreo en vivo
             </span>
           </div>
         )}

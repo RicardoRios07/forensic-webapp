@@ -42,10 +42,10 @@ export default function LogsPage() {
       <div className="mb-4 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground">
-            Log Viewer
+            Visor de Registros
           </h1>
           <p className="text-sm text-muted-foreground">
-            Real-time log stream with syntax highlighting and attack detection
+            Flujo de registros en tiempo real con resaltado de sintaxis y detecci\u00f3n de ataques
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -55,7 +55,7 @@ export default function LogsPage() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-state-running opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-state-running" />
               </span>
-              {logs.length.toLocaleString()} lines
+              {logs.length.toLocaleString()} l\u00edneas
             </span>
           )}
         </div>
@@ -66,7 +66,7 @@ export default function LogsPage() {
         <div className="relative flex-1 min-w-[200px]">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search logs..."
+            placeholder="Buscar registros..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="h-9 pl-9 text-sm bg-background"
@@ -75,16 +75,16 @@ export default function LogsPage() {
 
         <Select value={filterType} onValueChange={setFilterType}>
           <SelectTrigger className="h-9 w-40 text-xs">
-            <SelectValue placeholder="Filter" />
+            <SelectValue placeholder="Filtro" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Logs</SelectItem>
-            <SelectItem value="attacks">Attacks Only</SelectItem>
-            <SelectItem value="normal">Normal Only</SelectItem>
-            <SelectItem value="sqli">SQL Injection</SelectItem>
-            <SelectItem value="cmdi">Command Injection</SelectItem>
-            <SelectItem value="brute">Brute Force</SelectItem>
-            <SelectItem value="fi">File Inclusion</SelectItem>
+            <SelectItem value="all">Todos los Registros</SelectItem>
+            <SelectItem value="attacks">Solo Ataques</SelectItem>
+            <SelectItem value="normal">Solo Normal</SelectItem>
+            <SelectItem value="sqli">Inyecci\u00f3n SQL</SelectItem>
+            <SelectItem value="cmdi">Inyecci\u00f3n de Comandos</SelectItem>
+            <SelectItem value="brute">Fuerza Bruta</SelectItem>
+            <SelectItem value="fi">Inclusi\u00f3n de Archivos</SelectItem>
           </SelectContent>
         </Select>
 
@@ -96,11 +96,11 @@ export default function LogsPage() {
         >
           {isPaused ? (
             <>
-              <Play className="h-3.5 w-3.5" /> Resume
+              <Play className="h-3.5 w-3.5" /> Reanudar
             </>
           ) : (
             <>
-              <Pause className="h-3.5 w-3.5" /> Pause
+              <Pause className="h-3.5 w-3.5" /> Pausar
             </>
           )}
         </Button>
@@ -111,7 +111,7 @@ export default function LogsPage() {
           className="h-9 text-xs"
           onClick={() => setAutoScroll(!autoScroll)}
         >
-          Auto-scroll {autoScroll ? "ON" : "OFF"}
+          Auto-scroll {autoScroll ? "ACT" : "DES"}
         </Button>
 
         <Button
@@ -120,7 +120,7 @@ export default function LogsPage() {
           className="h-9 gap-1.5 text-xs bg-transparent"
           onClick={handleExport}
         >
-          <Download className="h-3.5 w-3.5" /> Export
+          <Download className="h-3.5 w-3.5" /> Exportar
         </Button>
 
         <Button
@@ -129,7 +129,7 @@ export default function LogsPage() {
           className="h-9 gap-1.5 text-xs text-severity-high hover:text-severity-critical bg-transparent"
           onClick={clearLogs}
         >
-          <Trash2 className="h-3.5 w-3.5" /> Clear
+          <Trash2 className="h-3.5 w-3.5" /> Limpiar
         </Button>
       </div>
 

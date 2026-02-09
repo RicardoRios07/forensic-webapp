@@ -41,10 +41,10 @@ const ATTACK_ICONS: Record<string, typeof ShieldAlert> = {
 };
 
 const ATTACK_LABELS: Record<string, string> = {
-  sqli: "SQL Injection",
-  command_injection: "Command Injection",
-  brute_force: "Brute Force",
-  file_inclusion: "File Inclusion",
+  sqli: "Inyecci\u00f3n SQL",
+  command_injection: "Inyecci\u00f3n de Comandos",
+  brute_force: "Fuerza Bruta",
+  file_inclusion: "Inclusi\u00f3n de Archivos",
 };
 
 export function TimelineView({ events }: TimelineViewProps) {
@@ -56,7 +56,7 @@ export function TimelineView({ events }: TimelineViewProps) {
     return (
       <div className="flex h-96 items-center justify-center rounded-lg border border-border bg-card">
         <p className="text-sm text-muted-foreground">
-          Timeline events will appear here as monitoring progresses...
+          Los eventos de la cronolog\u00eda aparecer\u00e1n aqu\u00ed a medida que avance el monitoreo...
         </p>
       </div>
     );
@@ -116,7 +116,7 @@ export function TimelineView({ events }: TimelineViewProps) {
                     )}
                     {event.type === "access" && (
                       <span className="text-xs font-medium text-severity-info">
-                        Normal Access
+                        Acceso Normal
                       </span>
                     )}
                     <span className="text-[10px] text-muted-foreground">
@@ -172,21 +172,21 @@ export function TimelineView({ events }: TimelineViewProps) {
                 <h3 className="text-sm font-bold text-foreground">
                   {selectedEvent.attackType
                     ? ATTACK_LABELS[selectedEvent.attackType]
-                    : "Access Event"}
+                    : "Evento de Acceso"}
                 </h3>
               </div>
 
               <div className="mt-4 space-y-3">
                 <DetailRow
-                  label="Time"
+                  label="Hora"
                   value={new Date(
                     selectedEvent.timestamp
                   ).toLocaleString()}
                 />
-                <DetailRow label="Severity" value={selectedEvent.severity} />
-                <DetailRow label="Type" value={selectedEvent.type} />
+                <DetailRow label="Severidad" value={selectedEvent.severity} />
+                <DetailRow label="Tipo" value={selectedEvent.type} />
                 {selectedEvent.details.ip && (
-                  <DetailRow label="Source IP" value={selectedEvent.details.ip} mono />
+                  <DetailRow label="IP Origen" value={selectedEvent.details.ip} mono />
                 )}
                 {selectedEvent.details.endpoint && (
                   <DetailRow
@@ -196,18 +196,18 @@ export function TimelineView({ events }: TimelineViewProps) {
                   />
                 )}
                 {selectedEvent.details.method && (
-                  <DetailRow label="Method" value={selectedEvent.details.method} />
+                  <DetailRow label="M\u00e9todo" value={selectedEvent.details.method} />
                 )}
                 {selectedEvent.details.statusCode && (
                   <DetailRow
-                    label="Status"
+                    label="Estado"
                     value={String(selectedEvent.details.statusCode)}
                   />
                 )}
                 {selectedEvent.details.payload && (
                   <div>
                     <span className="text-[10px] uppercase text-muted-foreground">
-                      Payload
+                      Carga \u00fatil
                     </span>
                     <code className="mt-1 block rounded bg-background px-3 py-2 font-mono text-xs text-severity-high break-all">
                       {decodeURIComponent(selectedEvent.details.payload)}
@@ -223,7 +223,7 @@ export function TimelineView({ events }: TimelineViewProps) {
             <Card className="border-border bg-card p-8 text-center">
               <ShieldAlert className="mx-auto h-8 w-8 text-muted-foreground" />
               <p className="mt-3 text-sm text-muted-foreground">
-                Select an event to view details
+                Selecciona un evento para ver detalles
               </p>
             </Card>
           )}

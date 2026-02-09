@@ -13,7 +13,7 @@ export function LogActivity({ stats }: LogActivityProps) {
     <Card className="border-border bg-card">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-sm font-medium text-muted-foreground">
-          Log Activity
+          Actividad de Registros
         </CardTitle>
         <Activity className="h-4 w-4 text-primary" />
       </CardHeader>
@@ -22,7 +22,7 @@ export function LogActivity({ stats }: LogActivityProps) {
           {stats?.linesProcessed.toLocaleString() ?? 0}
         </div>
         <p className="mt-1 text-xs text-muted-foreground">
-          {stats?.logRate ?? 0} lines/sec
+          {stats?.logRate ?? 0} l\u00edneas/seg
         </p>
 
         <div className="mt-4 grid grid-cols-2 gap-3">
@@ -31,7 +31,7 @@ export function LogActivity({ stats }: LogActivityProps) {
               {stats?.linesProcessed.toLocaleString() ?? 0}
             </div>
             <div className="text-[10px] text-muted-foreground">
-              Lines Processed
+              L\u00edneas Procesadas
             </div>
           </div>
           <div className="rounded-md bg-accent/50 px-3 py-2 text-center">
@@ -39,7 +39,7 @@ export function LogActivity({ stats }: LogActivityProps) {
               {stats?.errorsDetected ?? 0}
             </div>
             <div className="text-[10px] text-muted-foreground">
-              Errors (4xx/5xx)
+              Errores (4xx/5xx)
             </div>
           </div>
         </div>

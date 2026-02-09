@@ -27,13 +27,13 @@ function getLineHighlight(log: LogEntry): {
 } | null {
   const text = `${log.method} ${log.endpoint} ${log.params}`;
   if (SQLI_PATTERN.test(text))
-    return { type: "SQL Injection", color: "border-l-attack-sqli" };
+    return { type: "Inyecci\u00f3n SQL", color: "border-l-attack-sqli" };
   if (CMDI_PATTERN.test(text))
-    return { type: "Command Injection", color: "border-l-attack-cmdi" };
+    return { type: "Inyecci\u00f3n Cmd", color: "border-l-attack-cmdi" };
   if (FI_PATTERN.test(text))
-    return { type: "File Inclusion", color: "border-l-attack-fi" };
+    return { type: "Inclusi\u00f3n Arch.", color: "border-l-attack-fi" };
   if (BRUTE_PATTERN.test(text) && log.statusCode === 302)
-    return { type: "Brute Force", color: "border-l-attack-brute" };
+    return { type: "Fuerza Bruta", color: "border-l-attack-brute" };
   return null;
 }
 
@@ -100,22 +100,22 @@ export function LogViewer({
       if (filterType === "normal" && highlight) return false;
       if (
         filterType === "sqli" &&
-        highlight?.type !== "SQL Injection"
+        highlight?.type !== "Inyecci\u00f3n SQL"
       )
         return false;
       if (
         filterType === "cmdi" &&
-        highlight?.type !== "Command Injection"
+        highlight?.type !== "Inyecci\u00f3n Cmd"
       )
         return false;
       if (
         filterType === "brute" &&
-        highlight?.type !== "Brute Force"
+        highlight?.type !== "Fuerza Bruta"
       )
         return false;
       if (
         filterType === "fi" &&
-        highlight?.type !== "File Inclusion"
+        highlight?.type !== "Inclusi\u00f3n Arch."
       )
         return false;
     }
@@ -127,13 +127,13 @@ export function LogViewer({
       ref={containerRef}
       className="h-[calc(100vh-220px)] overflow-y-auto rounded-lg border border-border bg-background font-mono text-xs"
       role="log"
-      aria-label="Log viewer"
+      aria-label="Visor de registros"
       aria-live="polite"
     >
       {filteredLogs.length === 0 ? (
         <div className="flex h-full items-center justify-center">
           <p className="text-sm text-muted-foreground">
-            Waiting for log data...
+            Esperando datos de registros...
           </p>
         </div>
       ) : (
@@ -191,13 +191,13 @@ export function LogViewer({
                       <span
                         className={cn(
                           "inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold",
-                          highlight.type === "SQL Injection" &&
+                          highlight.type === "Inyecci\u00f3n SQL" &&
                             "bg-attack-sqli/20 text-attack-sqli",
-                          highlight.type === "Command Injection" &&
+                          highlight.type === "Inyecci\u00f3n Cmd" &&
                             "bg-attack-cmdi/20 text-attack-cmdi",
-                          highlight.type === "Brute Force" &&
+                          highlight.type === "Fuerza Bruta" &&
                             "bg-attack-brute/20 text-attack-brute",
-                          highlight.type === "File Inclusion" &&
+                          highlight.type === "Inclusi\u00f3n Arch." &&
                             "bg-attack-fi/20 text-attack-fi"
                         )}
                       >

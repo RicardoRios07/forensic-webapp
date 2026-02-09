@@ -20,30 +20,30 @@ const SEVERITY_STYLES: Record<
   critical: {
     badge: "bg-severity-critical text-foreground",
     border: "border-l-severity-critical",
-    label: "CRITICAL",
+    label: "CR\u00cdTICO",
   },
   high: {
     badge: "bg-severity-high text-foreground",
     border: "border-l-severity-high",
-    label: "HIGH",
+    label: "ALTO",
   },
   medium: {
     badge: "bg-severity-medium text-background",
     border: "border-l-severity-medium",
-    label: "MEDIUM",
+    label: "MEDIO",
   },
   low: {
     badge: "bg-severity-low text-foreground",
     border: "border-l-severity-low",
-    label: "LOW",
+    label: "BAJO",
   },
 };
 
 const ATTACK_LABELS: Record<string, string> = {
-  sqli: "SQL Injection",
-  command_injection: "Command Injection",
-  brute_force: "Brute Force",
-  file_inclusion: "File Inclusion",
+  sqli: "Inyecci\u00f3n SQL",
+  command_injection: "Inyecci\u00f3n de Comandos",
+  brute_force: "Fuerza Bruta",
+  file_inclusion: "Inclusi\u00f3n de Archivos",
 };
 
 const STATUS_STYLES: Record<string, string> = {
@@ -107,12 +107,12 @@ export function AlertCard({
             </span>
           </span>
           <span className="text-muted-foreground">
-            Target:{" "}
+            Objetivo:{" "}
             <span className="font-mono text-foreground">{alert.target}</span>
           </span>
         </div>
         <div className="text-xs text-muted-foreground">
-          Payload:{" "}
+          Carga \u00fatil:{" "}
           <code className="rounded bg-background px-1.5 py-0.5 font-mono text-severity-high">
             {decodeURIComponent(alert.payload).slice(0, 120)}
             {alert.payload.length > 120 ? "..." : ""}
@@ -129,7 +129,7 @@ export function AlertCard({
             onClick={() => onAcknowledge(alert.id)}
           >
             <Eye className="h-3 w-3" />
-            Acknowledge
+            Reconocer
           </Button>
         )}
         {alert.status !== "resolved" && (
@@ -140,7 +140,7 @@ export function AlertCard({
             onClick={() => onResolve(alert.id)}
           >
             <CheckCircle className="h-3 w-3" />
-            Resolve
+            Resolver
           </Button>
         )}
         <Button
@@ -160,9 +160,9 @@ function getTimeAgo(date: Date): string {
   const seconds = Math.floor(
     (Date.now() - new Date(date).getTime()) / 1000
   );
-  if (seconds < 60) return `${seconds}s ago`;
+  if (seconds < 60) return `hace ${seconds}s`;
   const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 60) return `hace ${minutes}m`;
   const hours = Math.floor(minutes / 60);
-  return `${hours}h ago`;
+  return `hace ${hours}h`;
 }

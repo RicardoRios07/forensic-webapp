@@ -88,7 +88,7 @@ export function ConnectionStatus() {
     <div className="flex items-center gap-2">
       <Select value={selectedId} onValueChange={setSelectedId}>
         <SelectTrigger className="h-8 w-36 text-xs">
-          <SelectValue placeholder="Container" />
+          <SelectValue placeholder="Contenedor" />
         </SelectTrigger>
         <SelectContent>
           {containers.map((c) => (
@@ -100,7 +100,7 @@ export function ConnectionStatus() {
       </Select>
       <Button size="sm" variant="default" onClick={handleConnect} className="h-8 gap-1 text-xs">
         <WifiOff className="h-3 w-3" />
-        Connect
+        Conectar
       </Button>
     </div>
   );

@@ -22,7 +22,7 @@ export function ContainerStatus({ stats, containerName }: ContainerStatusProps) 
     <Card className="border-border bg-card">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-sm font-medium text-muted-foreground">
-          Container Status
+          Estado del Contenedor
         </CardTitle>
         <Server className="h-4 w-4 text-muted-foreground" />
       </CardHeader>
@@ -32,7 +32,7 @@ export function ContainerStatus({ stats, containerName }: ContainerStatusProps) 
             className={`inline-flex h-2.5 w-2.5 rounded-full ${isRunning ? "bg-state-running" : "bg-state-stopped"}`}
           />
           <span className="text-2xl font-bold text-foreground">
-            {isRunning ? "Running" : "Stopped"}
+            {isRunning ? "Ejecutando" : "Detenido"}
           </span>
         </div>
         <p className="mt-1 text-xs text-muted-foreground">
@@ -52,14 +52,14 @@ export function ContainerStatus({ stats, containerName }: ContainerStatusProps) 
             <span className="text-xs font-semibold text-foreground">
               {stats ? formatBytes(stats.memoryUsage) : "0 MB"}
             </span>
-            <span className="text-[10px] text-muted-foreground">Memory</span>
+            <span className="text-[10px] text-muted-foreground">Memoria</span>
           </div>
           <div className="flex flex-col items-center rounded-md bg-accent/50 px-2 py-1.5">
             <ArrowUpDown className="mb-1 h-3 w-3 text-muted-foreground" />
             <span className="text-xs font-semibold text-foreground">
               {stats ? formatBytes(stats.networkIn) : "0 KB"}
             </span>
-            <span className="text-[10px] text-muted-foreground">Net I/O</span>
+            <span className="text-[10px] text-muted-foreground">Red E/S</span>
           </div>
         </div>
       </CardContent>
