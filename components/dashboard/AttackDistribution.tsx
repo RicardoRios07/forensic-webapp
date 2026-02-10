@@ -23,10 +23,10 @@ const ATTACK_COLORS: Record<string, string> = {
 };
 
 const ATTACK_LABELS: Record<string, string> = {
-  sqli: "Inyecci\u00f3n SQL",
-  command_injection: "Inyecci\u00f3n de Comandos",
+  sqli: "Inyección SQL",
+  command_injection: "Inyección de Comandos",
   brute_force: "Fuerza Bruta",
-  file_inclusion: "Inclusi\u00f3n de Archivos",
+  file_inclusion: "Inclusión de Archivos",
 };
 
 export function AttackDistribution({ stats }: AttackDistributionProps) {
@@ -46,7 +46,7 @@ export function AttackDistribution({ stats }: AttackDistributionProps) {
     <Card className="border-border bg-card">
       <CardHeader>
         <CardTitle className="text-sm font-medium text-muted-foreground">
-          Distribuci\u00f3n de Ataques
+          Distribución de Ataques
         </CardTitle>
       </CardHeader>
       <CardContent>

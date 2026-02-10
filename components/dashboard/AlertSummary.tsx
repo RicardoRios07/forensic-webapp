@@ -11,7 +11,7 @@ interface AlertSummaryProps {
 }
 
 const SEVERITY_CONFIG = [
-  { key: "critical", label: "Cr\u00edtico", className: "bg-severity-critical text-foreground" },
+  { key: "critical", label: "Crítico", className: "bg-severity-critical text-foreground" },
   { key: "high", label: "Alto", className: "bg-severity-high text-foreground" },
   { key: "medium", label: "Medio", className: "bg-severity-medium text-background" },
   { key: "low", label: "Bajo", className: "bg-severity-low text-foreground" },
@@ -30,7 +30,7 @@ export function AlertSummary({ stats }: AlertSummaryProps) {
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold text-foreground">{activeAlerts}</div>
-        <p className="mt-1 text-xs text-muted-foreground">alertas requieren atenci\u00f3n</p>
+        <p className="mt-1 text-xs text-muted-foreground">alertas requieren atención</p>
 
         <div className="mt-4 space-y-2">
           {SEVERITY_CONFIG.map((s) => {

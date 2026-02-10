@@ -28,13 +28,13 @@ export function AttackStatistics({ stats }: AttackStatisticsProps) {
 
         <div className="mt-4 space-y-2">
           <AttackRow
-            label="Inyecci\u00f3n SQL"
+            label="Inyección SQL"
             count={stats?.attacksByType.sqli ?? 0}
             total={total}
             color="bg-attack-sqli"
           />
           <AttackRow
-            label="Inyecci\u00f3n Cmd"
+            label="Inyección Cmd"
             count={stats?.attacksByType.command_injection ?? 0}
             total={total}
             color="bg-attack-cmdi"
@@ -46,7 +46,7 @@ export function AttackStatistics({ stats }: AttackStatisticsProps) {
             color="bg-attack-brute"
           />
           <AttackRow
-            label="Inclusi\u00f3n Arch."
+            label="Inclusión Arch."
             count={stats?.attacksByType.file_inclusion ?? 0}
             total={total}
             color="bg-attack-fi"

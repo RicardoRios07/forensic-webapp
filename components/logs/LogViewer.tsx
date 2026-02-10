@@ -27,11 +27,11 @@ function getLineHighlight(log: LogEntry): {
 } | null {
   const text = `${log.method} ${log.endpoint} ${log.params}`;
   if (SQLI_PATTERN.test(text))
-    return { type: "Inyecci\u00f3n SQL", color: "border-l-attack-sqli" };
+    return { type: "Inyección SQL", color: "border-l-attack-sqli" };
   if (CMDI_PATTERN.test(text))
-    return { type: "Inyecci\u00f3n Cmd", color: "border-l-attack-cmdi" };
+    return { type: "Inyección Cmd", color: "border-l-attack-cmdi" };
   if (FI_PATTERN.test(text))
-    return { type: "Inclusi\u00f3n Arch.", color: "border-l-attack-fi" };
+    return { type: "Inclusión Arch.", color: "border-l-attack-fi" };
   if (BRUTE_PATTERN.test(text) && log.statusCode === 302)
     return { type: "Fuerza Bruta", color: "border-l-attack-brute" };
   return null;
@@ -100,12 +100,12 @@ export function LogViewer({
       if (filterType === "normal" && highlight) return false;
       if (
         filterType === "sqli" &&
-        highlight?.type !== "Inyecci\u00f3n SQL"
+        highlight?.type !== "Inyección SQL"
       )
         return false;
       if (
         filterType === "cmdi" &&
-        highlight?.type !== "Inyecci\u00f3n Cmd"
+        highlight?.type !== "Inyección Cmd"
       )
         return false;
       if (
@@ -115,7 +115,7 @@ export function LogViewer({
         return false;
       if (
         filterType === "fi" &&
-        highlight?.type !== "Inclusi\u00f3n Arch."
+        highlight?.type !== "Inclusión Arch."
       )
         return false;
     }
@@ -191,13 +191,13 @@ export function LogViewer({
                       <span
                         className={cn(
                           "inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold",
-                          highlight.type === "Inyecci\u00f3n SQL" &&
+                          highlight.type === "Inyección SQL" &&
                             "bg-attack-sqli/20 text-attack-sqli",
-                          highlight.type === "Inyecci\u00f3n Cmd" &&
+                          highlight.type === "Inyección Cmd" &&
                             "bg-attack-cmdi/20 text-attack-cmdi",
                           highlight.type === "Fuerza Bruta" &&
                             "bg-attack-brute/20 text-attack-brute",
-                          highlight.type === "Inclusi\u00f3n Arch." &&
+                          highlight.type === "Inclusión Arch." &&
                             "bg-attack-fi/20 text-attack-fi"
                         )}
                       >

@@ -22,7 +22,7 @@ interface UseForensicStreamReturn {
   clearLogs: () => void;
 }
 
-export function useForensicStream(maxLogs = 1000): UseForensicStreamReturn {
+export function useForensicStream(maxLogs = 10000): UseForensicStreamReturn {
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [recentDetections, setRecentDetections] = useState<DetectionResult[]>(
     []
@@ -96,16 +96,38 @@ export function useForensicStream(maxLogs = 1000): UseForensicStreamReturn {
     setRecentDetections([]);
   }, []);
 
+  // Load historical logs on mount
+  useEffect(() => {
+    fetch("/api/docker/logs?limit=10000")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.logs && data.logs.length > 0) {
+          setLogs(data.logs);
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to load historical logs:", err);
+      });
+  }, []);
+
   // Auto-connect on mount
   useEffect(() => {
-    // First connect to the demo container
+    // Try to connect to DVWA container
     fetch("/api/docker/connect", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ containerId: "dvwa" }),
-    }).then(() => {
-      start();
-    });
+      body: JSON.stringify({ containerId: "dvwa-test" }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          start();
+        } else {
+          console.warn("Failed to auto-connect to container");
+        }
+      })
+      .catch((err) => {
+        console.error("Auto-connect error:", err);
+      });
 
     return () => {
       stop();

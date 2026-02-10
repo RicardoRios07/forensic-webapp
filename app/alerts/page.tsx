@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 
 const SEVERITY_FILTERS = [
   { value: "all", label: "Todas las Severidades" },
-  { value: "critical", label: "Cr\u00edtico" },
+  { value: "critical", label: "Crítico" },
   { value: "high", label: "Alto" },
   { value: "medium", label: "Medio" },
   { value: "low", label: "Bajo" },
@@ -31,10 +31,10 @@ const STATUS_FILTERS = [
 
 const TYPE_FILTERS = [
   { value: "all", label: "Todos los Tipos" },
-  { value: "sqli", label: "Inyecci\u00f3n SQL" },
-  { value: "command_injection", label: "Inyecci\u00f3n de Comandos" },
+  { value: "sqli", label: "Inyección SQL" },
+  { value: "command_injection", label: "Inyección de Comandos" },
   { value: "brute_force", label: "Fuerza Bruta" },
-  { value: "file_inclusion", label: "Inclusi\u00f3n de Archivos" },
+  { value: "file_inclusion", label: "Inclusión de Archivos" },
 ];
 
 export default function AlertsPage() {
@@ -106,7 +106,7 @@ export default function AlertsPage() {
           Alertas
         </h1>
         <p className="text-sm text-muted-foreground">
-          Alertas de seguridad generadas por el an\u00e1lisis de detecci\u00f3n de ataques
+          Alertas de seguridad generadas por el análisis de detección de ataques
         </p>
       </div>
 
@@ -116,7 +116,7 @@ export default function AlertsPage() {
           { key: "all", label: "Todas", style: "bg-accent text-foreground" },
           {
             key: "critical",
-            label: "Cr\u00edtico",
+            label: "Crítico",
             style: "bg-severity-critical/20 text-severity-critical",
           },
           {
@@ -188,7 +188,7 @@ export default function AlertsPage() {
           <div className="rounded-lg border border-border bg-card py-16 text-center">
             <p className="text-sm text-muted-foreground">
               No hay alertas que coincidan con tus filtros. Las alertas
-              aparecer\u00e1n a medida que se detecten ataques.
+              aparecerán a medida que se detecten ataques.
             </p>
           </div>
         ) : (

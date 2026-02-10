@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { store } from "@/lib/store";
-import { getDemoContainers } from "@/lib/docker/demoData";
+import { listContainers, checkDockerConnection } from "@/lib/docker/client";
 
 export async function POST(request: Request) {
   try {
@@ -8,35 +8,44 @@ export async function POST(request: Request) {
 
     if (!containerId) {
       return NextResponse.json(
-        { error: "containerId is required" },
+        { error: "containerId es requerido" },
         { status: 400 }
       );
     }
 
-    const containers = getDemoContainers();
+    // Check Docker availability
+    const dockerAvailable = await checkDockerConnection();
+    if (!dockerAvailable) {
+      return NextResponse.json(
+        { error: "Docker daemon no está disponible" },
+        { status: 503 }
+      );
+    }
+
+    // Get real containers
+    const containers = await listContainers();
     const container = containers.find(
       (c) => c.id === containerId || c.name === containerId
     );
 
+    if (!container) {
+      return NextResponse.json(
+        { error: "Contenedor no encontrado" },
+        { status: 404 }
+      );
+    }
+
     store.connectedContainerId = containerId;
-    store.connectedContainerName = container?.name || containerId;
+    store.connectedContainerName = container.name;
     store.isMonitoring = true;
 
     return NextResponse.json({
       success: true,
-      container: container || {
-        id: containerId,
-        name: containerId,
-        image: "vulnerables/web-dvwa",
-        state: "running",
-        status: "Up 2 hours",
-        created: new Date().toISOString(),
-        ports: "0.0.0.0:8080->80/tcp",
-      },
+      container,
     });
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to connect", details: String(error) },
+      { error: "Error al conectar", details: String(error) },
       { status: 500 }
     );
   }

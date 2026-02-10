@@ -16,7 +16,7 @@ import { LogViewer } from "@/components/logs/LogViewer";
 
 export default function LogsPage() {
   const { logs, isStreaming, isPaused, pause, resume, clearLogs } =
-    useForensicStream();
+    useForensicStream(10000);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterType, setFilterType] = useState("all");
   const [autoScroll, setAutoScroll] = useState(true);
@@ -45,19 +45,19 @@ export default function LogsPage() {
             Visor de Registros
           </h1>
           <p className="text-sm text-muted-foreground">
-            Flujo de registros en tiempo real con resaltado de sintaxis y detecci\u00f3n de ataques
+            Flujo de registros en tiempo real con resaltado de sintaxis y detección de ataques
           </p>
         </div>
         <div className="flex items-center gap-2">
-          {isStreaming && (
-            <span className="flex items-center gap-1 text-xs text-muted-foreground">
-              <span className="relative flex h-1.5 w-1.5">
+          <span className="flex items-center gap-1 text-xs text-muted-foreground">
+            {isStreaming && (
+              <span className="relative flex h-1.5 w-1.5 mr-1">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-state-running opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-state-running" />
               </span>
-              {logs.length.toLocaleString()} l\u00edneas
-            </span>
-          )}
+            )}
+            {logs.length.toLocaleString()} líneas mostradas
+          </span>
         </div>
       </div>
 
@@ -81,10 +81,10 @@ export default function LogsPage() {
             <SelectItem value="all">Todos los Registros</SelectItem>
             <SelectItem value="attacks">Solo Ataques</SelectItem>
             <SelectItem value="normal">Solo Normal</SelectItem>
-            <SelectItem value="sqli">Inyecci\u00f3n SQL</SelectItem>
-            <SelectItem value="cmdi">Inyecci\u00f3n de Comandos</SelectItem>
+            <SelectItem value="sqli">Inyección SQL</SelectItem>
+            <SelectItem value="cmdi">Inyección de Comandos</SelectItem>
             <SelectItem value="brute">Fuerza Bruta</SelectItem>
-            <SelectItem value="fi">Inclusi\u00f3n de Archivos</SelectItem>
+            <SelectItem value="fi">Inclusión de Archivos</SelectItem>
           </SelectContent>
         </Select>
 

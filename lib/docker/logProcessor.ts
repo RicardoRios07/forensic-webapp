@@ -100,15 +100,22 @@ class LogProcessor {
   }
 
   parseLogLine(line: string): LogEntry | null {
+    // Clean Docker log format
+    // Remove Docker timestamp (ISO format at start) and control characters
+    let cleanLine = line
+      .replace(/^\d{4}-\d{2}-\d{2}T[\d:.]+Z\s+/, "") // Remove ISO timestamp
+      .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, "") // Remove control chars
+      .trim();
+
     // Apache combined log format
     const apacheRegex =
       /^(\S+) \S+ \S+ \[([^\]]+)\] "(\S+) (\S+) [^"]*" (\d{3}) (\d+|-)/;
-    const match = line.match(apacheRegex);
+    const match = cleanLine.match(apacheRegex);
 
     if (!match) {
       // Try simpler format: just IP and request
       const simpleRegex = /(\d+\.\d+\.\d+\.\d+).*"(\S+) (\S+)/;
-      const simpleMatch = line.match(simpleRegex);
+      const simpleMatch = cleanLine.match(simpleRegex);
       if (!simpleMatch) return null;
 
       const endpoint = simpleMatch[3];
@@ -116,7 +123,7 @@ class LogProcessor {
 
       return {
         id: generateId(),
-        raw: line,
+        raw: cleanLine,
         ip: simpleMatch[1],
         timestamp: new Date(),
         method: simpleMatch[2],
@@ -133,7 +140,7 @@ class LogProcessor {
 
     return {
       id: generateId(),
-      raw: line,
+      raw: cleanLine,
       ip: match[1],
       timestamp: this.parseApacheDate(match[2]) || new Date(),
       method: match[3],

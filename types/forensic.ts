@@ -96,6 +96,11 @@ export interface DashboardStats {
   errorsDetected: number;
   alertsByStatus: Record<AlertStatus, number>;
   alertsBySeverity: Record<Severity, number>;
+  bySeverity: Record<Severity, number>;
+  totalLogs: number;
+  totalAlerts: number;
+  errorRate: number;
+  avgResponseTime: number;
 }
 
 // ---- Process Result ----

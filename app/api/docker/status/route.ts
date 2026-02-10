@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { store } from "@/lib/store";
+import { getContainerStats, checkDockerConnection } from "@/lib/docker/client";
 
 export async function GET() {
   if (!store.connectedContainerId) {
@@ -9,29 +10,34 @@ export async function GET() {
     });
   }
 
-  // Simulated container stats
-  const upSeconds = Math.floor((Date.now() - (Date.now() - 7200000)) / 1000);
-  const hours = Math.floor(upSeconds / 3600);
-  const mins = Math.floor((upSeconds % 3600) / 60);
+  try {
+    // Check if Docker is available
+    const dockerAvailable = await checkDockerConnection();
+    
+    if (!dockerAvailable) {
+      return NextResponse.json(
+        { error: 'Docker daemon no está disponible' },
+        { status: 503 }
+      );
+    }
 
-  const stats = {
-    cpuPercent: +(Math.random() * 15 + 2).toFixed(1),
-    memoryUsage: Math.floor(Math.random() * 100000000 + 50000000),
-    memoryLimit: 536870912,
-    memoryPercent: +(Math.random() * 30 + 10).toFixed(1),
-    networkIn: Math.floor(Math.random() * 10000000),
-    networkOut: Math.floor(Math.random() * 5000000),
-    uptime: `${hours}h ${mins}m`,
-    running: true,
-  };
+    // Get real stats
+    const stats = await getContainerStats(store.connectedContainerId);
+    store.containerStats = stats;
 
-  store.containerStats = stats;
-
-  return NextResponse.json({
-    connected: true,
-    containerId: store.connectedContainerId,
-    containerName: store.connectedContainerName,
-    isMonitoring: store.isMonitoring,
-    stats,
-  });
+    return NextResponse.json({
+      connected: true,
+      containerId: store.connectedContainerId,
+      containerName: store.connectedContainerName,
+      isMonitoring: store.isMonitoring,
+      stats,
+      source: 'docker',
+    });
+  } catch (error) {
+    console.error('Error getting container status:', error);
+    return NextResponse.json(
+      { error: "Failed to get status", details: String(error) },
+      { status: 500 }
+    );
+  }
 }

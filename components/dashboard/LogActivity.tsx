@@ -22,7 +22,7 @@ export function LogActivity({ stats }: LogActivityProps) {
           {stats?.linesProcessed.toLocaleString() ?? 0}
         </div>
         <p className="mt-1 text-xs text-muted-foreground">
-          {stats?.logRate ?? 0} l\u00edneas/seg
+          {stats?.logRate ?? 0} líneas/seg
         </p>
 
         <div className="mt-4 grid grid-cols-2 gap-3">
@@ -31,7 +31,7 @@ export function LogActivity({ stats }: LogActivityProps) {
               {stats?.linesProcessed.toLocaleString() ?? 0}
             </div>
             <div className="text-[10px] text-muted-foreground">
-              L\u00edneas Procesadas
+              Líneas Procesadas
             </div>
           </div>
           <div className="rounded-md bg-accent/50 px-3 py-2 text-center">

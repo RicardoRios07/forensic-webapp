@@ -16,9 +16,9 @@ import type { TimelineEvent } from "@/types/forensic";
 import { cn } from "@/lib/utils";
 
 const TIME_RANGES = [
-  { value: "5m", label: "\u00dalt. 5 min", ms: 5 * 60 * 1000 },
-  { value: "1h", label: "\u00dalt. 1 hora", ms: 60 * 60 * 1000 },
-  { value: "24h", label: "\u00dalt. 24 horas", ms: 24 * 60 * 60 * 1000 },
+  { value: "5m", label: "Últ. 5 min", ms: 5 * 60 * 1000 },
+  { value: "1h", label: "Últ. 1 hora", ms: 60 * 60 * 1000 },
+  { value: "24h", label: "Últ. 24 horas", ms: 24 * 60 * 60 * 1000 },
   { value: "all", label: "Todo", ms: 0 },
 ];
 
@@ -76,10 +76,10 @@ export default function TimelinePage() {
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground">
-            Cronolog\u00eda de Incidentes
+            Cronología de Incidentes
           </h1>
           <p className="text-sm text-muted-foreground">
-            Vista cronol\u00f3gica de todos los eventos de seguridad y patrones de acceso
+            Vista cronológica de todos los eventos de seguridad y patrones de acceso
           </p>
         </div>
         <Button
@@ -89,7 +89,7 @@ export default function TimelinePage() {
           onClick={handleExport}
         >
           <Download className="h-3.5 w-3.5" />
-          Exportar Cronolog\u00eda
+          Exportar Cronología
         </Button>
       </div>
 
@@ -121,10 +121,10 @@ export default function TimelinePage() {
             <SelectItem value="all">Todos los Tipos</SelectItem>
             <SelectItem value="attack">Ataques</SelectItem>
             <SelectItem value="access">Acceso Normal</SelectItem>
-            <SelectItem value="sqli">Inyecci\u00f3n SQL</SelectItem>
-            <SelectItem value="command_injection">Inyecci\u00f3n de Comandos</SelectItem>
+            <SelectItem value="sqli">Inyección SQL</SelectItem>
+            <SelectItem value="command_injection">Inyección de Comandos</SelectItem>
             <SelectItem value="brute_force">Fuerza Bruta</SelectItem>
-            <SelectItem value="file_inclusion">Inclusi\u00f3n de Archivos</SelectItem>
+            <SelectItem value="file_inclusion">Inclusión de Archivos</SelectItem>
           </SelectContent>
         </Select>
 

@@ -56,8 +56,12 @@ class ForensicStore {
     this.totalLinesProcessed++;
   }
 
-  getLogs(limit = 200): LogEntry[] {
+  getLogs(limit = 10000): LogEntry[] {
     return this.logs.slice(-limit);
+  }
+
+  getAllLogs(): LogEntry[] {
+    return this.logs;
   }
 
   // ---- Alerts ----
@@ -177,6 +181,19 @@ class ForensicStore {
       Math.max((Date.now() - this.lastStatsReset) / 1000, 1)
     ).toFixed(1);
 
+    const errorRate = +(
+      this.logs.filter(
+        (l) => l.statusCode >= 400
+      ).length / this.totalLinesProcessed
+    ).toFixed(1);
+
+    const avgResponseTime = +(
+      this.logs.reduce(
+        (acc, l) => acc + (l.responseTime || 0),
+        0
+      ) / this.logs.length
+    ).toFixed(1);
+
     return {
       totalAttacks,
       attacksByType,
@@ -189,6 +206,10 @@ class ForensicStore {
       ).length,
       alertsByStatus,
       alertsBySeverity,
+      totalLogs: this.logs.length,
+      totalAlerts: this.alerts.length,
+      errorRate,
+      avgResponseTime,
     };
   }
 
@@ -198,11 +219,54 @@ class ForensicStore {
     this.alerts = [];
     this.timeline = [];
     this.totalLinesProcessed = 0;
+    this.linesPerSecondBuckets = [];
+    this.attacksPerMinuteBuckets = [];
     this.lastStatsReset = Date.now();
     this.connectedContainerId = null;
     this.connectedContainerName = null;
     this.isMonitoring = false;
+    this.containerStats = {
+      cpuPercent: 0,
+      memoryUsage: 0,
+      memoryLimit: 0,
+      memoryPercent: 0,
+      networkIn: 0,
+      networkOut: 0,
+      uptime: "0s",
+      running: false,
+    };
   }
+
+  stats: DashboardStats = {
+    totalAttacks: 0,
+    attacksByType: {
+      sqli: 0,
+      command_injection: 0,
+      brute_force: 0,
+      file_inclusion: 0,
+    },
+    attackRate: 0,
+    topIPs: [],
+    linesProcessed: 0,
+    logRate: 0,
+    errorsDetected: 0,
+    alertsByStatus: {
+      active: 0,
+      acknowledged: 0,
+      resolved: 0,
+    },
+    alertsBySeverity: {
+      critical: 0,
+      high: 0,
+      medium: 0,
+      low: 0,
+      info: 0,
+    },
+    totalLogs: 0,
+    totalAlerts: 0,
+    errorRate: 0,
+    avgResponseTime: 0,
+  };
 }
 
 // Singleton

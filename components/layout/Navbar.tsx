@@ -8,6 +8,8 @@ import {
   ShieldAlert,
   Clock,
   Shield,
+  Package,
+  Globe,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ConnectionStatus } from "./ConnectionStatus";
@@ -16,7 +18,9 @@ const NAV_ITEMS = [
   { href: "/", label: "Panel", icon: LayoutDashboard },
   { href: "/logs", label: "Registros", icon: ScrollText },
   { href: "/alerts", label: "Alertas", icon: ShieldAlert },
-  { href: "/timeline", label: "Cronolog\u00eda", icon: Clock },
+  { href: "/timeline", label: "Cronología", icon: Clock },
+  // { href: "/map", label: "Mapa", icon: Globe },
+  { href: "/evidence", label: "Evidencias", icon: Package },
 ];
 
 export function Navbar() {
@@ -34,7 +38,7 @@ export function Navbar() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" role="navigation" aria-label="Navegaci\u00f3n principal">
+        <nav className="hidden items-center gap-1 md:flex" role="navigation" aria-label="Navegación principal">
           {NAV_ITEMS.map((item) => {
             const isActive =
               pathname === item.href ||

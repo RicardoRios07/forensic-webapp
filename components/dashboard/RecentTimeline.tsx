@@ -33,7 +33,7 @@ export function RecentTimeline({ events }: RecentTimelineProps) {
     <Card className="border-border bg-card">
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="text-sm font-medium text-muted-foreground">
-          Cronolog\u00eda Reciente
+          Cronología Reciente
         </CardTitle>
         <Button variant="ghost" size="sm" asChild className="h-7 gap-1 text-xs text-primary">
           <Link href="/timeline">

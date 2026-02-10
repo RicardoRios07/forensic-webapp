@@ -8,6 +8,7 @@ import { AlertSummary } from "@/components/dashboard/AlertSummary";
 import { AttackDistribution } from "@/components/dashboard/AttackDistribution";
 import { RecentTimeline } from "@/components/dashboard/RecentTimeline";
 import { TopIPs } from "@/components/dashboard/TopIPs";
+import { ResetButton } from "@/components/dashboard/ResetButton";
 import { useForensicStream } from "@/hooks/use-forensic-stream";
 import type {
   ContainerStats,
@@ -57,20 +58,23 @@ export default function DashboardPage() {
             Panel Forense
           </h1>
           <p className="text-sm text-muted-foreground">
-            Monitoreo en tiempo real y detecci&oacute;n de ataques para contenedor DVWA
+            Monitoreo en tiempo real y detección de ataques para contenedor DVWA
           </p>
         </div>
-        {isStreaming && (
-          <div className="flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-            </span>
-            <span className="text-xs font-medium text-primary">
-              Monitoreo en vivo
-            </span>
-          </div>
-        )}
+        <div className="flex items-center gap-3">
+          <ResetButton />
+          {isStreaming && (
+            <div className="flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+              </span>
+              <span className="text-xs font-medium text-primary">
+                Monitoreo en vivo
+              </span>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Top Stats Row */}

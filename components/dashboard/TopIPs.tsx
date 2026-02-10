@@ -15,14 +15,14 @@ export function TopIPs({ stats }: TopIPsProps) {
     <Card className="border-border bg-card">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-sm font-medium text-muted-foreground">
-          IPs con M\u00e1s Ataques
+          IPs con Más Ataques
         </CardTitle>
         <Globe className="h-4 w-4 text-muted-foreground" />
       </CardHeader>
       <CardContent>
         {topIPs.length === 0 ? (
           <p className="py-4 text-center text-sm text-muted-foreground">
-            Sin datos a\u00fan
+            Sin datos aún
           </p>
         ) : (
           <div className="space-y-3">

@@ -67,6 +67,22 @@ export function ConnectionStatus() {
     }
   };
 
+  const handleDisconnect = async () => {
+    try {
+      const res = await fetch("/api/docker/disconnect", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await res.json();
+      if (data.success) {
+        setConnected(false);
+        setContainerName("");
+      }
+    } catch {
+      // ignore
+    }
+  };
+
   if (connected) {
     return (
       <div className="flex items-center gap-2">
@@ -80,6 +96,15 @@ export function ConnectionStatus() {
           </span>
         </div>
         <Wifi className="h-4 w-4 text-state-running" />
+        <Button
+          size="sm"
+          variant="ghost"
+          onClick={handleDisconnect}
+          className="h-8 gap-1 text-xs"
+        >
+          <WifiOff className="h-3 w-3" />
+          Desconectar
+        </Button>
       </div>
     );
   }

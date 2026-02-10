@@ -20,7 +20,7 @@ const SEVERITY_STYLES: Record<
   critical: {
     badge: "bg-severity-critical text-foreground",
     border: "border-l-severity-critical",
-    label: "CR\u00cdTICO",
+    label: "CRÍTICO",
   },
   high: {
     badge: "bg-severity-high text-foreground",
@@ -40,16 +40,22 @@ const SEVERITY_STYLES: Record<
 };
 
 const ATTACK_LABELS: Record<string, string> = {
-  sqli: "Inyecci\u00f3n SQL",
-  command_injection: "Inyecci\u00f3n de Comandos",
+  sqli: "Inyección SQL",
+  command_injection: "Inyección de Comandos",
   brute_force: "Fuerza Bruta",
-  file_inclusion: "Inclusi\u00f3n de Archivos",
+  file_inclusion: "Inclusión de Archivos",
 };
 
 const STATUS_STYLES: Record<string, string> = {
   active: "bg-severity-high/20 text-severity-high",
   acknowledged: "bg-severity-medium/20 text-severity-medium",
   resolved: "bg-severity-info/20 text-severity-info",
+};
+
+const STATUS_LABELS: Record<string, string> = {
+  active: "Activa",
+  acknowledged: "Reconocida",
+  resolved: "Resuelta",
 };
 
 export function AlertCard({
@@ -89,7 +95,7 @@ export function AlertCard({
               STATUS_STYLES[alert.status]
             )}
           >
-            {alert.status}
+            {STATUS_LABELS[alert.status] || alert.status}
           </span>
         </div>
         <div className="flex items-center gap-1 text-xs text-muted-foreground">
@@ -112,7 +118,7 @@ export function AlertCard({
           </span>
         </div>
         <div className="text-xs text-muted-foreground">
-          Carga \u00fatil:{" "}
+          Carga útil:{" "}
           <code className="rounded bg-background px-1.5 py-0.5 font-mono text-severity-high">
             {decodeURIComponent(alert.payload).slice(0, 120)}
             {alert.payload.length > 120 ? "..." : ""}

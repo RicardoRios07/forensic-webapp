@@ -19,7 +19,7 @@ const _jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "DVWA Monitor Forense",
   description:
-    "Panel de an\u00e1lisis forense en tiempo real para contenedores Docker con DVWA. Detecta inyecci\u00f3n SQL, inyecci\u00f3n de comandos, fuerza bruta e inclusi\u00f3n de archivos.",
+    "Panel de análisis forense en tiempo real para contenedores Docker con DVWA. Detecta inyección SQL, inyección de comandos, fuerza bruta e inclusión de archivos.",
 };
 
 export const viewport: Viewport = {
