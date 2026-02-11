@@ -26,7 +26,7 @@ NC='\033[0m' # No Color
 # Configuración
 DVWA_CONTAINER="dvwa-test"
 DVWA_PORT="8888"
-WEBAPP_PORT="3001"
+WEBAPP_PORT="3000"
 WEBAPP_URL="http://localhost:${WEBAPP_PORT}"
 DVWA_URL="http://localhost:${DVWA_PORT}"
 TEST_RESULTS_DIR="./test-results"

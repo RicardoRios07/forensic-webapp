@@ -10,6 +10,7 @@ import {
   Shield,
   Package,
   Globe,
+  Network,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ConnectionStatus } from "./ConnectionStatus";
@@ -19,6 +20,7 @@ const NAV_ITEMS = [
   { href: "/logs", label: "Registros", icon: ScrollText },
   { href: "/alerts", label: "Alertas", icon: ShieldAlert },
   { href: "/timeline", label: "Cronología", icon: Clock },
+  { href: "/network", label: "Red", icon: Network },
   // { href: "/map", label: "Mapa", icon: Globe },
   { href: "/evidence", label: "Evidencias", icon: Package },
 ];

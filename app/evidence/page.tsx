@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -11,12 +11,36 @@ import {
   GitCompare,
   FileBox,
   Shield,
+  Trash2,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
+type FilesystemCapture = {
+  id: string;
+  timestamp: string;
+  containerId: string;
+};
 
 export default function EvidencePage() {
   const { toast } = useToast();
   const [isGenerating, setIsGenerating] = useState(false);
+  const [filesystemCaptures, setFilesystemCaptures] = useState<FilesystemCapture[]>([]);
+
+  useEffect(() => {
+    fetchFilesystemCaptures();
+  }, []);
+
+  const fetchFilesystemCaptures = async () => {
+    try {
+      const response = await fetch("/api/evidence/filesystem");
+      const data = await response.json();
+      if (data.success) {
+        setFilesystemCaptures(data.captures || []);
+      }
+    } catch (error) {
+      console.error("Error fetching filesystem captures:", error);
+    }
+  };
 
   const handleExportLogs = async () => {
     try {
@@ -162,10 +186,26 @@ export default function EvidencePage() {
       });
       const data = await response.json();
 
+      if (!response.ok) {
+        toast({
+          title: "Error",
+          description: data.error || "No se pudo capturar el filesystem",
+          variant: "destructive",
+        });
+        return;
+      }
+
       if (data.success) {
         toast({
           title: "Filesystem capturado",
-          description: "El estado del filesystem se capturó correctamente",
+          description: data.message || "El estado del filesystem se capturó correctamente",
+        });
+        fetchFilesystemCaptures();
+      } else {
+        toast({
+          title: "Advertencia",
+          description: data.message || "No se pudo capturar el filesystem",
+          variant: "destructive",
         });
       }
     } catch (error) {
@@ -176,6 +216,30 @@ export default function EvidencePage() {
       });
     } finally {
       setIsGenerating(false);
+    }
+  };
+
+  const handleExportFilesystem = async (captureId: string) => {
+    try {
+      const response = await fetch(`/api/evidence/filesystem/export?id=${captureId}`);
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `filesystem-${captureId}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      toast({
+        title: "Filesystem exportado",
+        description: "La captura de filesystem se ha descargado correctamente",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "No se pudo exportar el filesystem",
+        variant: "destructive",
+      });
     }
   };
 
@@ -377,12 +441,42 @@ export default function EvidencePage() {
               <CardTitle>Archivos Capturados</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="rounded-md border border-border">
-                <div className="p-4 text-center text-sm text-muted-foreground">
-                  No hay archivos capturados aún. Usa los botones de arriba
-                  para capturar evidencias.
+              {filesystemCaptures.length === 0 ? (
+                <div className="rounded-md border border-border p-4 text-center text-sm text-muted-foreground">
+                  No hay archivos capturados aún. Usa el botón de arriba para
+                  capturar evidencias.
                 </div>
-              </div>
+              ) : (
+                <div className="space-y-2">
+                  {filesystemCaptures.map((capture) => (
+                    <div
+                      key={capture.id}
+                      className="flex items-center justify-between rounded-md border border-border p-3"
+                    >
+                      <div className="flex items-center gap-3">
+                        <FileBox className="h-4 w-4 text-muted-foreground" />
+                        <div className="text-sm">
+                          <p className="font-medium">
+                            {new Date(capture.timestamp).toLocaleString()}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            ID: {capture.id}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => handleExportFilesystem(capture.id)}
+                        >
+                          <Download className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>

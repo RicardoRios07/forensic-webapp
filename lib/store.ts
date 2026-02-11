@@ -47,6 +47,14 @@ class ForensicStore {
     running: false,
   };
 
+  // Filesystem captures
+  filesystemCaptures: Array<{
+    id: string;
+    timestamp: string;
+    output: string;
+    containerId: string;
+  }> = [];
+
   // ---- Logs ----
   addLog(entry: LogEntry) {
     this.logs.push(entry);
@@ -136,6 +144,26 @@ class ForensicStore {
     return result;
   }
 
+  // ---- Filesystem Captures ----
+  addFilesystemCapture(output: string, containerId: string) {
+    const capture = {
+      id: `fs-${Date.now()}`,
+      timestamp: new Date().toISOString(),
+      output,
+      containerId,
+    };
+    this.filesystemCaptures.push(capture);
+    return capture;
+  }
+
+  getFilesystemCaptures() {
+    return this.filesystemCaptures;
+  }
+
+  getLatestFilesystemCapture() {
+    return this.filesystemCaptures[this.filesystemCaptures.length - 1] || null;
+  }
+
   // ---- Dashboard Stats ----
   getDashboardStats(): DashboardStats {
     const attacksByType: Record<AttackType, number> = {
@@ -218,6 +246,7 @@ class ForensicStore {
     this.logs = [];
     this.alerts = [];
     this.timeline = [];
+    this.filesystemCaptures = [];
     this.totalLinesProcessed = 0;
     this.linesPerSecondBuckets = [];
     this.attacksPerMinuteBuckets = [];
@@ -271,12 +300,11 @@ class ForensicStore {
 
 // Singleton
 const globalForStore = globalThis as unknown as {
-  forensicStore: ForensicStore;
+  __forensicStore__: ForensicStore | undefined;
 };
 
-export const store =
-  globalForStore.forensicStore ?? new ForensicStore();
-
-if (process.env.NODE_ENV !== "production") {
-  globalForStore.forensicStore = store;
+if (!globalForStore.__forensicStore__) {
+  globalForStore.__forensicStore__ = new ForensicStore();
 }
+
+export const store = globalForStore.__forensicStore__;
