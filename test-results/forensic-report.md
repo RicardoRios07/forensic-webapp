@@ -1,7 +1,7 @@
 # REPORTE FORENSE - DVWA Monitor
 ## Análisis de Incidente de Seguridad
 
-**Fecha de Generación:** 2026-02-10T23:01:45.905Z  
+**Fecha de Generación:** 2026-02-24T23:10:51.720Z  
 **Contenedor Analizado:** dvwa-test  
 **ID del Contenedor:** dvwa-test
 
@@ -10,169 +10,71 @@
 ## 1. RESUMEN EJECUTIVO
 
 Este reporte documenta el análisis forense realizado sobre el contenedor Docker **dvwa-test**.
-Durante el período de monitoreo se detectaron **21** ataques, generando **21** alertas de seguridad.
+Durante el período de monitoreo se detectaron **7** ataques, generando **7** alertas de seguridad.
 
 ### Estadísticas Clave
 
-- **Total de Ataques Detectados:** 21
-- **Tasa de Ataques:** 6.60 ataques/minuto
-- **Líneas de Log Procesadas:** 27
-- **Errores HTTP Detectados:** 24
+- **Total de Ataques Detectados:** 7
+- **Tasa de Ataques:** 1.00 ataques/minuto
+- **Líneas de Log Procesadas:** 12
+- **Errores HTTP Detectados:** 9
 
 ### Distribución de Ataques
 
 | Tipo de Ataque | Cantidad | Porcentaje |
 |----------------|----------|------------|
-| Inyección SQL | 6 | 28.6% |
-| Inyección de Comandos | 9 | 42.9% |
+| Inyección SQL | 2 | 28.6% |
+| Inyección de Comandos | 3 | 42.9% |
 | Fuerza Bruta | 0 | 0.0% |
-| Inclusión de Archivos | 6 | 28.6% |
+| Inclusión de Archivos | 2 | 28.6% |
 
 ---
 
 ## 2. LÍNEA DE TIEMPO DEL INCIDENTE
 
-### 1. 6:01:28 PM 🟡 SQL Injection detected from 192.168.65.1
+### 1. 6:10:34 PM 🟡 SQL Injection detected from 192.168.65.1
 - **Tipo:** attack
 - **IP Origen:** 192.168.65.1
 - **Endpoint:** /vulnerabilities/sqli/
 - **Método:** GET
 - **Payload:** `id=1'+OR+'1'='1&Submit=Submit`
 
-### 2. 6:01:28 PM 🟡 SQL Injection detected from 192.168.65.1
-- **Tipo:** attack
-- **IP Origen:** 192.168.65.1
-- **Endpoint:** /vulnerabilities/sqli/
-- **Método:** GET
-- **Payload:** `id=1'+OR+'1'='1&Submit=Submit`
-
-### 3. 6:01:28 PM 🟡 SQL Injection detected from 192.168.65.1
-- **Tipo:** attack
-- **IP Origen:** 192.168.65.1
-- **Endpoint:** /vulnerabilities/sqli/
-- **Método:** GET
-- **Payload:** `id=1'+OR+'1'='1&Submit=Submit`
-
-### 4. 6:01:30 PM 🟠 SQL Injection detected from 192.168.65.1
+### 2. 6:10:36 PM 🟠 SQL Injection detected from 192.168.65.1
 - **Tipo:** attack
 - **IP Origen:** 192.168.65.1
 - **Endpoint:** /vulnerabilities/sqli/
 - **Método:** GET
 - **Payload:** `id=1'+UNION+SELECT+null,version()--&Submit=Submit`
 
-### 5. 6:01:30 PM 🟠 SQL Injection detected from 192.168.65.1
-- **Tipo:** attack
-- **IP Origen:** 192.168.65.1
-- **Endpoint:** /vulnerabilities/sqli/
-- **Método:** GET
-- **Payload:** `id=1'+UNION+SELECT+null,version()--&Submit=Submit`
-
-### 6. 6:01:30 PM 🟠 SQL Injection detected from 192.168.65.1
-- **Tipo:** attack
-- **IP Origen:** 192.168.65.1
-- **Endpoint:** /vulnerabilities/sqli/
-- **Método:** GET
-- **Payload:** `id=1'+UNION+SELECT+null,version()--&Submit=Submit`
-
-### 7. 6:01:32 PM 🔴 Command Injection detected from 192.168.65.1
+### 3. 6:10:38 PM 🔴 Command Injection detected from 192.168.65.1
 - **Tipo:** attack
 - **IP Origen:** 192.168.65.1
 - **Endpoint:** /vulnerabilities/exec/
 - **Método:** GET
 - **Payload:** `ip=127.0.0.1;cat+/etc/passwd&Submit=Submit`
 
-### 8. 6:01:32 PM 🟠 File Inclusion detected from 192.168.65.1
+### 4. 6:10:38 PM 🟠 File Inclusion detected from 192.168.65.1
 - **Tipo:** attack
 - **IP Origen:** 192.168.65.1
 - **Endpoint:** /vulnerabilities/exec/
 - **Método:** GET
 - **Payload:** `ip=127.0.0.1;cat+/etc/passwd&Submit=Submit`
 
-### 9. 6:01:32 PM 🔴 Command Injection detected from 192.168.65.1
-- **Tipo:** attack
-- **IP Origen:** 192.168.65.1
-- **Endpoint:** /vulnerabilities/exec/
-- **Método:** GET
-- **Payload:** `ip=127.0.0.1;cat+/etc/passwd&Submit=Submit`
-
-### 10. 6:01:32 PM 🟠 File Inclusion detected from 192.168.65.1
-- **Tipo:** attack
-- **IP Origen:** 192.168.65.1
-- **Endpoint:** /vulnerabilities/exec/
-- **Método:** GET
-- **Payload:** `ip=127.0.0.1;cat+/etc/passwd&Submit=Submit`
-
-### 11. 6:01:32 PM 🔴 Command Injection detected from 192.168.65.1
-- **Tipo:** attack
-- **IP Origen:** 192.168.65.1
-- **Endpoint:** /vulnerabilities/exec/
-- **Método:** GET
-- **Payload:** `ip=127.0.0.1;cat+/etc/passwd&Submit=Submit`
-
-### 12. 6:01:32 PM 🟠 File Inclusion detected from 192.168.65.1
-- **Tipo:** attack
-- **IP Origen:** 192.168.65.1
-- **Endpoint:** /vulnerabilities/exec/
-- **Método:** GET
-- **Payload:** `ip=127.0.0.1;cat+/etc/passwd&Submit=Submit`
-
-### 13. 6:01:35 PM 🔴 Command Injection detected from 192.168.65.1
+### 5. 6:10:40 PM 🔴 Command Injection detected from 192.168.65.1
 - **Tipo:** attack
 - **IP Origen:** 192.168.65.1
 - **Endpoint:** /vulnerabilities/exec/
 - **Método:** GET
 - **Payload:** `ip=127.0.0.1;whoami&Submit=Submit`
 
-### 14. 6:01:35 PM 🔴 Command Injection detected from 192.168.65.1
-- **Tipo:** attack
-- **IP Origen:** 192.168.65.1
-- **Endpoint:** /vulnerabilities/exec/
-- **Método:** GET
-- **Payload:** `ip=127.0.0.1;whoami&Submit=Submit`
-
-### 15. 6:01:35 PM 🔴 Command Injection detected from 192.168.65.1
-- **Tipo:** attack
-- **IP Origen:** 192.168.65.1
-- **Endpoint:** /vulnerabilities/exec/
-- **Método:** GET
-- **Payload:** `ip=127.0.0.1;whoami&Submit=Submit`
-
-### 16. 6:01:37 PM 🔴 Command Injection detected from 192.168.65.1
+### 6. 6:10:42 PM 🔴 Command Injection detected from 192.168.65.1
 - **Tipo:** attack
 - **IP Origen:** 192.168.65.1
 - **Endpoint:** /vulnerabilities/fi/
 - **Método:** GET
 - **Payload:** `page=../../etc/passwd`
 
-### 17. 6:01:37 PM 🟠 File Inclusion detected from 192.168.65.1
-- **Tipo:** attack
-- **IP Origen:** 192.168.65.1
-- **Endpoint:** /vulnerabilities/fi/
-- **Método:** GET
-- **Payload:** `page=../../etc/passwd`
-
-### 18. 6:01:37 PM 🔴 Command Injection detected from 192.168.65.1
-- **Tipo:** attack
-- **IP Origen:** 192.168.65.1
-- **Endpoint:** /vulnerabilities/fi/
-- **Método:** GET
-- **Payload:** `page=../../etc/passwd`
-
-### 19. 6:01:37 PM 🟠 File Inclusion detected from 192.168.65.1
-- **Tipo:** attack
-- **IP Origen:** 192.168.65.1
-- **Endpoint:** /vulnerabilities/fi/
-- **Método:** GET
-- **Payload:** `page=../../etc/passwd`
-
-### 20. 6:01:37 PM 🔴 Command Injection detected from 192.168.65.1
-- **Tipo:** attack
-- **IP Origen:** 192.168.65.1
-- **Endpoint:** /vulnerabilities/fi/
-- **Método:** GET
-- **Payload:** `page=../../etc/passwd`
-
-### 21. 6:01:37 PM 🟠 File Inclusion detected from 192.168.65.1
+### 7. 6:10:42 PM 🟠 File Inclusion detected from 192.168.65.1
 - **Tipo:** attack
 - **IP Origen:** 192.168.65.1
 - **Endpoint:** /vulnerabilities/fi/
@@ -188,251 +90,95 @@ Durante el período de monitoreo se detectaron **21** ataques, generando **21** 
 
 | Severidad | Cantidad |
 |-----------|----------|
-| 🔴 Crítico | 9 |
-| 🟠 Alto | 9 |
-| 🟡 Medio | 3 |
+| 🔴 Crítico | 3 |
+| 🟠 Alto | 3 |
+| 🟡 Medio | 1 |
 | 🔵 Bajo | 0 |
 
 ### Alertas Detalladas
 
 #### Alerta #1 - ALTO
 
-- **ID:** 1770764497315-74-gp1y9j
-- **Timestamp:** 2026-02-10T23:01:37.315Z
+- **ID:** 1771974642754-23-e49j0i
+- **Timestamp:** 2026-02-24T23:10:42.754Z
 - **Tipo de Ataque:** Inclusión de Archivos
 - **IP Origen:** 192.168.65.1
 - **Objetivo:** /vulnerabilities/fi/
 - **Payload:** `page=../../etc/passwd`
 - **Estado:** active
-- **Evidencia:** 1770764497315-71-85nhcq
+- **Evidencia:** 1771974642754-20-v95685
 
 
 #### Alerta #2 - CRÍTICO
 
-- **ID:** 1770764497315-72-7gnb3l
-- **Timestamp:** 2026-02-10T23:01:37.315Z
+- **ID:** 1771974642754-21-zxgx3m
+- **Timestamp:** 2026-02-24T23:10:42.754Z
 - **Tipo de Ataque:** Inyección de Comandos
 - **IP Origen:** 192.168.65.1
 - **Objetivo:** /vulnerabilities/fi/
 - **Payload:** `page=../../etc/passwd`
 - **Estado:** active
-- **Evidencia:** 1770764497315-71-85nhcq
+- **Evidencia:** 1771974642754-20-v95685
 
 
-#### Alerta #3 - ALTO
+#### Alerta #3 - CRÍTICO
 
-- **ID:** 1770764497314-69-o0f9yc
-- **Timestamp:** 2026-02-10T23:01:37.314Z
-- **Tipo de Ataque:** Inclusión de Archivos
-- **IP Origen:** 192.168.65.1
-- **Objetivo:** /vulnerabilities/fi/
-- **Payload:** `page=../../etc/passwd`
-- **Estado:** active
-- **Evidencia:** 1770764497314-66-n696w5
-
-
-#### Alerta #4 - CRÍTICO
-
-- **ID:** 1770764497314-67-gxozqc
-- **Timestamp:** 2026-02-10T23:01:37.314Z
-- **Tipo de Ataque:** Inyección de Comandos
-- **IP Origen:** 192.168.65.1
-- **Objetivo:** /vulnerabilities/fi/
-- **Payload:** `page=../../etc/passwd`
-- **Estado:** active
-- **Evidencia:** 1770764497314-66-n696w5
-
-
-#### Alerta #5 - ALTO
-
-- **ID:** 1770764497313-64-u7qr6l
-- **Timestamp:** 2026-02-10T23:01:37.313Z
-- **Tipo de Ataque:** Inclusión de Archivos
-- **IP Origen:** 192.168.65.1
-- **Objetivo:** /vulnerabilities/fi/
-- **Payload:** `page=../../etc/passwd`
-- **Estado:** active
-- **Evidencia:** 1770764497313-61-atm4rz
-
-
-#### Alerta #6 - CRÍTICO
-
-- **ID:** 1770764497313-62-1vw2wv
-- **Timestamp:** 2026-02-10T23:01:37.313Z
-- **Tipo de Ataque:** Inyección de Comandos
-- **IP Origen:** 192.168.65.1
-- **Objetivo:** /vulnerabilities/fi/
-- **Payload:** `page=../../etc/passwd`
-- **Estado:** active
-- **Evidencia:** 1770764497313-61-atm4rz
-
-
-#### Alerta #7 - CRÍTICO
-
-- **ID:** 1770764495306-59-0zb8p8
-- **Timestamp:** 2026-02-10T23:01:35.306Z
+- **ID:** 1771974640748-18-v3uwjz
+- **Timestamp:** 2026-02-24T23:10:40.748Z
 - **Tipo de Ataque:** Inyección de Comandos
 - **IP Origen:** 192.168.65.1
 - **Objetivo:** /vulnerabilities/exec/
 - **Payload:** `ip=127.0.0.1;whoami&Submit=Submit`
 - **Estado:** active
-- **Evidencia:** 1770764495306-58-dq5ecm
+- **Evidencia:** 1771974640748-17-fjti1c
 
 
-#### Alerta #8 - CRÍTICO
+#### Alerta #4 - ALTO
 
-- **ID:** 1770764495305-56-d6kcl8
-- **Timestamp:** 2026-02-10T23:01:35.305Z
-- **Tipo de Ataque:** Inyección de Comandos
-- **IP Origen:** 192.168.65.1
-- **Objetivo:** /vulnerabilities/exec/
-- **Payload:** `ip=127.0.0.1;whoami&Submit=Submit`
-- **Estado:** active
-- **Evidencia:** 1770764495304-55-tezrnb
-
-
-#### Alerta #9 - CRÍTICO
-
-- **ID:** 1770764495303-53-posg2p
-- **Timestamp:** 2026-02-10T23:01:35.303Z
-- **Tipo de Ataque:** Inyección de Comandos
-- **IP Origen:** 192.168.65.1
-- **Objetivo:** /vulnerabilities/exec/
-- **Payload:** `ip=127.0.0.1;whoami&Submit=Submit`
-- **Estado:** active
-- **Evidencia:** 1770764495302-52-host3b
-
-
-#### Alerta #10 - ALTO
-
-- **ID:** 1770764492295-50-juosy0
-- **Timestamp:** 2026-02-10T23:01:32.295Z
+- **ID:** 1771974638742-15-shrrsy
+- **Timestamp:** 2026-02-24T23:10:38.742Z
 - **Tipo de Ataque:** Inclusión de Archivos
 - **IP Origen:** 192.168.65.1
 - **Objetivo:** /vulnerabilities/exec/
 - **Payload:** `ip=127.0.0.1;cat+/etc/passwd&Submit=Submit`
 - **Estado:** active
-- **Evidencia:** 1770764492295-47-445chi
+- **Evidencia:** 1771974638742-12-mfi35r
 
 
-#### Alerta #11 - CRÍTICO
+#### Alerta #5 - CRÍTICO
 
-- **ID:** 1770764492295-48-3jdu3h
-- **Timestamp:** 2026-02-10T23:01:32.295Z
+- **ID:** 1771974638742-13-273hoq
+- **Timestamp:** 2026-02-24T23:10:38.742Z
 - **Tipo de Ataque:** Inyección de Comandos
 - **IP Origen:** 192.168.65.1
 - **Objetivo:** /vulnerabilities/exec/
 - **Payload:** `ip=127.0.0.1;cat+/etc/passwd&Submit=Submit`
 - **Estado:** active
-- **Evidencia:** 1770764492295-47-445chi
+- **Evidencia:** 1771974638742-12-mfi35r
 
 
-#### Alerta #12 - ALTO
+#### Alerta #6 - ALTO
 
-- **ID:** 1770764492295-45-6a4rep
-- **Timestamp:** 2026-02-10T23:01:32.295Z
-- **Tipo de Ataque:** Inclusión de Archivos
-- **IP Origen:** 192.168.65.1
-- **Objetivo:** /vulnerabilities/exec/
-- **Payload:** `ip=127.0.0.1;cat+/etc/passwd&Submit=Submit`
-- **Estado:** active
-- **Evidencia:** 1770764492295-42-81i2ch
-
-
-#### Alerta #13 - CRÍTICO
-
-- **ID:** 1770764492295-43-bm11ue
-- **Timestamp:** 2026-02-10T23:01:32.295Z
-- **Tipo de Ataque:** Inyección de Comandos
-- **IP Origen:** 192.168.65.1
-- **Objetivo:** /vulnerabilities/exec/
-- **Payload:** `ip=127.0.0.1;cat+/etc/passwd&Submit=Submit`
-- **Estado:** active
-- **Evidencia:** 1770764492295-42-81i2ch
-
-
-#### Alerta #14 - ALTO
-
-- **ID:** 1770764492294-40-g7f2ou
-- **Timestamp:** 2026-02-10T23:01:32.294Z
-- **Tipo de Ataque:** Inclusión de Archivos
-- **IP Origen:** 192.168.65.1
-- **Objetivo:** /vulnerabilities/exec/
-- **Payload:** `ip=127.0.0.1;cat+/etc/passwd&Submit=Submit`
-- **Estado:** active
-- **Evidencia:** 1770764492293-37-mgbape
-
-
-#### Alerta #15 - CRÍTICO
-
-- **ID:** 1770764492294-38-3bw102
-- **Timestamp:** 2026-02-10T23:01:32.294Z
-- **Tipo de Ataque:** Inyección de Comandos
-- **IP Origen:** 192.168.65.1
-- **Objetivo:** /vulnerabilities/exec/
-- **Payload:** `ip=127.0.0.1;cat+/etc/passwd&Submit=Submit`
-- **Estado:** active
-- **Evidencia:** 1770764492293-37-mgbape
-
-
-#### Alerta #16 - ALTO
-
-- **ID:** 1770764490289-35-1fmp7q
-- **Timestamp:** 2026-02-10T23:01:30.289Z
+- **ID:** 1771974636739-10-cmtm4n
+- **Timestamp:** 2026-02-24T23:10:36.739Z
 - **Tipo de Ataque:** Inyección SQL
 - **IP Origen:** 192.168.65.1
 - **Objetivo:** /vulnerabilities/sqli/
 - **Payload:** `id=1'+UNION+SELECT+null,version()--&Submit=Submit`
 - **Estado:** active
-- **Evidencia:** 1770764490289-34-fxlvrg
+- **Evidencia:** 1771974636739-9-jfi1o1
 
 
-#### Alerta #17 - ALTO
+#### Alerta #7 - MEDIO
 
-- **ID:** 1770764490288-32-7lsljp
-- **Timestamp:** 2026-02-10T23:01:30.288Z
-- **Tipo de Ataque:** Inyección SQL
-- **IP Origen:** 192.168.65.1
-- **Objetivo:** /vulnerabilities/sqli/
-- **Payload:** `id=1'+UNION+SELECT+null,version()--&Submit=Submit`
-- **Estado:** active
-- **Evidencia:** 1770764490288-31-00lac9
-
-
-#### Alerta #18 - ALTO
-
-- **ID:** 1770764490287-29-zezh2c
-- **Timestamp:** 2026-02-10T23:01:30.287Z
-- **Tipo de Ataque:** Inyección SQL
-- **IP Origen:** 192.168.65.1
-- **Objetivo:** /vulnerabilities/sqli/
-- **Payload:** `id=1'+UNION+SELECT+null,version()--&Submit=Submit`
-- **Estado:** active
-- **Evidencia:** 1770764490287-28-felipm
-
-
-#### Alerta #19 - MEDIO
-
-- **ID:** 1770764488282-26-4qtzic
-- **Timestamp:** 2026-02-10T23:01:28.282Z
+- **ID:** 1771974634735-7-7i61rv
+- **Timestamp:** 2026-02-24T23:10:34.735Z
 - **Tipo de Ataque:** Inyección SQL
 - **IP Origen:** 192.168.65.1
 - **Objetivo:** /vulnerabilities/sqli/
 - **Payload:** `id=1'+OR+'1'='1&Submit=Submit`
 - **Estado:** active
-- **Evidencia:** 1770764488282-25-cs6uwa
-
-
-#### Alerta #20 - MEDIO
-
-- **ID:** 1770764488281-23-r6tf6e
-- **Timestamp:** 2026-02-10T23:01:28.281Z
-- **Tipo de Ataque:** Inyección SQL
-- **IP Origen:** 192.168.65.1
-- **Objetivo:** /vulnerabilities/sqli/
-- **Payload:** `id=1'+OR+'1'='1&Submit=Submit`
-- **Estado:** active
-- **Evidencia:** 1770764488281-22-oh83sp
+- **Evidencia:** 1771974634735-6-2a5l5m
 
 
 
@@ -442,7 +188,7 @@ Durante el período de monitoreo se detectaron **21** ataques, generando **21** 
 
 ### Inyección SQL (SQLi)
 
-Se detectaron **6** intentos de inyección SQL. Este tipo de ataque permite a los atacantes manipular consultas a la base de datos.
+Se detectaron **2** intentos de inyección SQL. Este tipo de ataque permite a los atacantes manipular consultas a la base de datos.
 
 **Patrones Comunes Detectados:**
 - `' OR '1'='1`
@@ -452,7 +198,7 @@ Se detectaron **6** intentos de inyección SQL. Este tipo de ataque permite a lo
 
 ### Inyección de Comandos
 
-Se registraron **9** ataques de inyección de comandos, permitiendo ejecución remota de código.
+Se registraron **3** ataques de inyección de comandos, permitiendo ejecución remota de código.
 
 **Comandos Ejecutados:**
 - `cat /etc/passwd`
@@ -466,7 +212,7 @@ Se registraron **9** ataques de inyección de comandos, permitiendo ejecución r
 
 ### Inclusión de Archivos (LFI/RFI)
 
-**6** intentos de acceder a archivos no autorizados.
+**2** intentos de acceder a archivos no autorizados.
 
 ---
 
@@ -474,7 +220,7 @@ Se registraron **9** ataques de inyección de comandos, permitiendo ejecución r
 
 ### Top IPs con Mayor Actividad
 
-1. **192.168.65.1** - 21 ataques
+1. **192.168.65.1** - 7 ataques
 
 ---
 
@@ -521,7 +267,7 @@ Todos los archivos de evidencia han sido procesados con hash SHA256 para garanti
 ## 8. CONCLUSIONES
 
 El análisis forense revela múltiples vectores de ataque explotados contra el contenedor DVWA.
-Los ataques más prevalentes fueron **Inyección de Comandos** con 9 ocurrencias.
+Los ataques más prevalentes fueron **Inyección de Comandos** con 3 ocurrencias.
 
 La evidencia recolectada demuestra:
 - Actividad maliciosa confirmada
@@ -534,7 +280,7 @@ La evidencia recolectada demuestra:
 
 **Herramienta:** DVWA Forensic Monitor  
 **Versión:** 1.0.0  
-**Fecha:** 2026-02-10T23:01:45.905Z  
+**Fecha:** 2026-02-24T23:10:51.720Z  
 
 ---
 
