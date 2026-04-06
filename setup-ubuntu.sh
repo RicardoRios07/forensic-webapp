@@ -274,6 +274,39 @@ ensure_swap_for_low_memory() {
     fi
 }
 
+ensure_disk_space() {
+    log_info "Verificando espacio en disco para build Docker..."
+
+    local avail_gb
+    avail_gb=$(df -BG / | awk 'NR==2 {gsub("G","",$4); print $4}')
+
+    if [ -z "$avail_gb" ]; then
+        log_warning "No se pudo determinar espacio libre. Continuando..."
+        return
+    fi
+
+    log_info "Espacio libre detectado en / : ${avail_gb}GB"
+
+    if [ "$avail_gb" -lt 6 ]; then
+        log_warning "Espacio libre bajo (<6GB). Limpiando caché Docker y APT para evitar ENOSPC..."
+        docker system prune -af || true
+        apt-get clean || true
+        rm -rf /var/lib/apt/lists/* || true
+        apt-get update || true
+
+        avail_gb=$(df -BG / | awk 'NR==2 {gsub("G","",$4); print $4}')
+        log_info "Espacio libre después de limpieza: ${avail_gb}GB"
+    fi
+
+    if [ "$avail_gb" -lt 4 ]; then
+        log_error "Espacio insuficiente para build Docker (${avail_gb}GB libres)."
+        log_error "Aumenta el disco de la instancia o libera espacio antes de continuar."
+        exit 1
+    fi
+
+    log_success "Espacio en disco suficiente para continuar"
+}
+
 ################################################################################
 # 7. Configurar Apache como reverse proxy
 ################################################################################
@@ -553,6 +586,7 @@ main() {
     setup_project_dir
     sync_project_files
     ensure_swap_for_low_memory
+    ensure_disk_space
     configure_apache_proxy
     create_systemd_service
     create_utility_scripts
