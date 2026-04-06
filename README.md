@@ -345,21 +345,4 @@ La aplicación rastrea:
 1. Reiniciar el servidor de desarrollo
 2. Limpiar caché: `pnpm clean` y `pnpm dev`
 
-## 📝 Licencia
 
-Este proyecto es parte de un trabajo académico de Computación Forense.
-
-## 👥 Contribución
-
-Proyecto educativo - UIDE 7mo Semestre - Computación Forense
-
-## 🙏 Agradecimientos
-
-- [DVWA](https://github.com/digininja/DVWA) - Damn Vulnerable Web Application
-- [dockerode](https://github.com/apocas/dockerode) - Docker API para Node.js
-- [Next.js](https://nextjs.org/) - Framework React
-- [shadcn/ui](https://ui.shadcn.com/) - Componentes UI
-
----
-
-**Nota**: Esta herramienta es exclusivamente para fines educativos y de investigación en seguridad. No usar en sistemas de producción o con intenciones maliciosas.

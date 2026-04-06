@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  # Base de datos para DVWA
+  dvwa-db:
+    image: mysql:5.7
+    container_name: dvwa-db
+    environment:
+      MYSQL_DATABASE: dvwa
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: dvwa
+      MYSQL_PASSWORD: dvwa
+    volumes:
+      - dvwa_db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - forensic-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # DVWA (Damn Vulnerable Web App)
+  dvwa:
+    image: vulnerables/web-dvwa
+    container_name: dvwa
+    environment:
+      MYSQL_HOSTNAME: dvwa-db
+      MYSQL_DATABASE: dvwa
+      MYSQL_USER: dvwa
+      MYSQL_PASSWORD: dvwa
+    depends_on:
+      dvwa-db:
+        condition: service_healthy
+    volumes:
+      - dvwa_data:/var/www/html
+    ports:
+      - "8080:80"
+    networks:
+      - forensic-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Aplicación Forensic Monitor
+  forensic-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: forensic-webapp
+    environment:
+      NODE_ENV: production
+      DOCKER_HOST: unix:///var/run/docker.sock
+      NEXT_PUBLIC_API_URL: http://localhost:3000
+    depends_on:
+      dvwa:
+        condition: service_healthy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./logs:/app/logs
+    ports:
+      - "3000:3000"
+    networks:
+      - forensic-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+volumes:
+  dvwa_db_data:
+  dvwa_data:
+
+networks:
+  forensic-network:
+    driver: bridge
