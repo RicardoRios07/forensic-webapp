@@ -3,6 +3,9 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Reduce picos de memoria en hosts pequeños (ej. t2/t3 micro)
+ENV NODE_OPTIONS=--max-old-space-size=768
+
 # Instalar pnpm
 RUN npm install -g pnpm
 
@@ -10,7 +13,8 @@ RUN npm install -g pnpm
 COPY package.json pnpm-lock.yaml* ./
 
 # Instalar dependencias
-RUN pnpm install --frozen-lockfile
+RUN --mount=type=cache,target=/root/.local/share/pnpm/store \
+  pnpm install --frozen-lockfile --child-concurrency=1
 
 # Copiar código fuente
 COPY . .

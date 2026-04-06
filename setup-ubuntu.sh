@@ -20,6 +20,7 @@ PROJECT_DIR="/opt/forensic-webapp"
 DOCKER_COMPOSE_FILE="$PROJECT_DIR/docker-compose.yml"
 APACHE_SITE_CONFIG="/etc/apache2/sites-available/forensic-webapp.conf"
 SYSTEMD_SERVICE="/etc/systemd/system/forensic-webapp.service"
+SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 ################################################################################
 # Funciones de utilidad
@@ -216,6 +217,63 @@ setup_project_dir() {
     chmod 755 "$PROJECT_DIR"
 }
 
+sync_project_files() {
+    log_info "Copiando archivos del proyecto desde $SOURCE_DIR hacia $PROJECT_DIR..."
+
+    if [ ! -f "$SOURCE_DIR/docker-compose.yml" ] || [ ! -f "$SOURCE_DIR/Dockerfile" ]; then
+        log_error "No se encontraron Dockerfile/docker-compose.yml en $SOURCE_DIR"
+        log_error "Ejecuta este script desde la carpeta raíz del proyecto"
+        exit 1
+    fi
+
+    if command -v rsync > /dev/null 2>&1; then
+        rsync -a --delete \
+            --exclude '.git' \
+            --exclude 'node_modules' \
+            --exclude '.next' \
+            --exclude 'test-results' \
+            "$SOURCE_DIR/" "$PROJECT_DIR/"
+    else
+        cp -a "$SOURCE_DIR/." "$PROJECT_DIR/"
+        rm -rf "$PROJECT_DIR/node_modules" "$PROJECT_DIR/.next" || true
+    fi
+
+    chmod -R 755 "$PROJECT_DIR"
+    log_success "Archivos del proyecto sincronizados en $PROJECT_DIR"
+}
+
+ensure_swap_for_low_memory() {
+    log_info "Verificando memoria disponible para build Docker..."
+
+    local mem_mb swap_mb
+    mem_mb=$(awk '/MemTotal/ {print int($2/1024)}' /proc/meminfo)
+    swap_mb=$(awk '/SwapTotal/ {print int($2/1024)}' /proc/meminfo)
+
+    log_info "Memoria RAM detectada: ${mem_mb}MB | Swap detectada: ${swap_mb}MB"
+
+    if [ "$mem_mb" -lt 2000 ] && [ "$swap_mb" -lt 1024 ]; then
+        log_warning "RAM baja detectada. Creando swap de 2GB para evitar fallos de build (exit 137)..."
+
+        if [ ! -f /swapfile ]; then
+            if ! fallocate -l 2G /swapfile; then
+                dd if=/dev/zero of=/swapfile bs=1M count=2048 status=progress
+            fi
+            chmod 600 /swapfile
+            mkswap /swapfile
+        fi
+
+        swapon /swapfile || true
+        if ! grep -q '^/swapfile ' /etc/fstab; then
+            echo '/swapfile none swap sw 0 0' >> /etc/fstab
+        fi
+
+        sysctl -w vm.swappiness=10 > /dev/null
+        log_success "Swap configurada correctamente"
+    else
+        log_success "Memoria suficiente, no es necesario crear swap adicional"
+    fi
+}
+
 ################################################################################
 # 7. Configurar Apache como reverse proxy
 ################################################################################
@@ -330,6 +388,12 @@ EOF
 
 start_services() {
     log_info "Iniciando servicios..."
+
+    if [ ! -f "$DOCKER_COMPOSE_FILE" ]; then
+        log_error "No existe $DOCKER_COMPOSE_FILE"
+        log_error "Verifica la sincronización de archivos del proyecto"
+        exit 1
+    fi
     
     # Iniciar servicio
     systemctl start forensic-webapp
@@ -487,6 +551,8 @@ main() {
     verify_docker
     install_apache
     setup_project_dir
+    sync_project_files
+    ensure_swap_for_low_memory
     configure_apache_proxy
     create_systemd_service
     create_utility_scripts
